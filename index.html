@@ -1,41 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Challenge - DOM</title>
-  </head>
-  <body>
-    <div id="app">
-      <!-- TODO: Buatlah sebuah header dengan id todo-title -->
-      <!-- TODO: Buatlah sebuah subtitle dengan id todo-subtitle -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100">
+<div id="app" class="mx-auto mt-16 p-6 rounded-xl w-[600px] bg-white shadow-lg">
+    <!-- TODO: Buatlah sebuah header dengan id todo-title -->
+    <h1 class="text-4xl font-semibold text-teal-500" id="todo-title">Todo List</h1>
 
-      <!-- Section: input -->
-      <!-- TODO: Buatlah sebuah input bertipe text dengan id todo-input -->
-      <!-- TODO: Buatlah sebuah button dengan id todo-submit -->
+    <!-- TODO: Buatlah sebuah subtitle dengan id todo-subtitle -->
+    <h2 id="todo-subtitle" class="text-gray-400 text-xl font-light italic">Todo list for today</h2>
 
-      <!-- Section output -->
-      <!-- TODO: Buatlah sebuah <ul> dengan id todo-output -->
-    </div>
+    <!-- Section: input -->
+    <section class="my-4 flex w-full space-x-2">
+        <!-- TODO: Buatlah sebuah input bertipe text dengan id todo-input -->
+        <div class="flex-grow">
+            <label for="todo-input"></label>
+            <input type="text" id="todo-input" class="bg-gray-100 rounded-md px-4 py-1.5 outline-none w-full">
+        </div>
+        <!-- TODO: Buatlah sebuah button dengan id todo-submit -->
+        <button id="todo-submit" class="bg-teal-100 text-teal-700 rounded-md px-2 py-1.5 hover:shadow-md">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                 stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+            </svg>
+        </button>
+    </section>
 
-    <!-- ! Untuk tantangan ini, script jangan diubah ke external js yah ! -->
-    <script>
-      // TODO: Deklarasi variable sesuai dengan kebutuhan di sini
-      let button;
-      let input;
-      let output;
+    <!-- Section output -->
+    <!-- TODO: Buatlah sebuah <ul> dengan id todo-output -->
+    <section>
+        <ul id="todo-output" class="space-y-2">
+        </ul>
+    </section>
+</div>
 
-      // TODO: Buatlah sebuah fungsi dengan nama fnClickHandler
-      // Fungsi yang digunakan untuk menambahkan tulisan
-      // Jangan ubah cara deklarasi fungsinya, cukup isi saja
-      function fnClickHandler(toDoItem) {}
+<!-- ! Untuk tantangan ini, script jangan diubah ke external js yah ! -->
+<script>
+    // Deklarasi variable sesuai dengan kebutuhan di sini
+    let button = document.getElementById("todo-submit");
+    let input = document.getElementById("todo-input");
+    let output = document.getElementById("todo-output");
 
-      // TODO: register event onclick / addEventListener untuk button
-      // akan menjalankan fungsi fnClickHandler
-      
-      // TODO: register event onkeypress / addEventListener untuk input
-      // sehingga saat di input ditekan enter akan menjalankan fungsi fnClickHandler juga
-    </script>
-  </body>
+    // autofocus ke input
+    input.focus()
+
+    // Buatlah sebuah fungsi dengan nama fnClickHandler
+    // Fungsi yang digunakan untuk menambahkan tulisan
+    // Jangan ubah cara deklarasi fungsinya, cukup isi saja
+    function fnClickHandler(toDoItem) {
+        const itemElement = document.createElement("li")
+        itemElement.className = "border rounded-md px-2 py-1.5"
+        itemElement.innerText = toDoItem
+        output.appendChild(itemElement)
+        input.value = ""
+        input.focus()
+    }
+
+    // register event onclick / addEventListener untuk button
+    // akan menjalankan fungsi fnClickHandler
+    button.addEventListener("click", () => {
+        fnClickHandler(input.value)
+    })
+
+    // register event onkeypress / addEventListener untuk input
+    // sehingga saat di input ditekan enter akan menjalankan fungsi fnClickHandler juga
+    input.addEventListener("keypress", (event) => {
+        if (event.key == "Enter")
+            fnClickHandler(input.value)
+    })
+</script>
+</body>
 </html>
